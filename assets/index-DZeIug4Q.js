@@ -1160,7 +1160,20 @@ object kiosco {
 `,extra:`object universidad {
   method esArancelada() = false
 }
-`,expectativas:[{metodo:"sofia.puedeEstudiarGratis/0"}]}],repaso:[{pregunta:"En `universidad.esArancelada()`, ¿quién recibe el mensaje?",opciones:["`universidad`","`esArancelada`","Los paréntesis","Nadie"],correcta:0},{pregunta:"¿Qué define un `method` dentro de un objeto?",opciones:["Lo que el objeto hace cuando le llega ese mensaje","El nombre del objeto","Un archivo","Nada"],correcta:0}]},{id:"02-cursar",titulo:"Cursar",descripcion:"Objetos que recuerdan: materias aprobadas, viajes y raciones.",icono:"📚",color:"#d97706",ejercicios:[{id:"02-cursar/04-aprobar",titulo:"Aprobar",tipo:"codigo",xp:10,enunciado:"Sofía cursa de noche, porque de día trabaja. Cada materia aprobada cuenta.\n\n**Tu misión:** programá a `sofia`: recuerda cuántas `aprobadas()` tiene (arranca en **0**), y `aprobar()`\nsuma **1**.",pistas:["La pregunta: `method aprobadas() = aprobadas`.","La orden va con llaves: `method aprobar() { aprobadas = aprobadas + 1 }`."],desenlace:"Cada vez más personas cursan mientras trabajan. Las universidades públicas ofrecen bandas horarias de mañana, tarde y noche para que trabajar y estudiar no sean cosas incompatibles.",inicial:`object sofia {
+`,expectativas:[{metodo:"sofia.puedeEstudiarGratis/0"}]}],repaso:[{pregunta:"En `universidad.esArancelada()`, ¿quién recibe el mensaje?",opciones:["`universidad`","`esArancelada`","Los paréntesis","Nadie"],correcta:0},{pregunta:"¿Qué define un `method` dentro de un objeto?",opciones:["Lo que el objeto hace cuando le llega ese mensaje","El nombre del objeto","Un archivo","Nada"],correcta:0}]},{id:"02-cursar",titulo:"Cursar",descripcion:"Objetos que recuerdan: materias aprobadas, viajes y raciones.",icono:"📚",color:"#d97706",ejercicios:[{id:"02-cursar/04-aprobar",titulo:"Aprobar",tipo:"codigo",xp:10,enunciado:`Sofía cursa de noche, porque de día trabaja, y quiere llevar la cuenta de las materias que aprueba.
+Así la va a usar:
+
+\`\`\`wollok
+sofia.aprobadas()   // 0
+sofia.aprobar()
+sofia.aprobar()
+sofia.aprobadas()   // 2
+\`\`\`
+
+**Tu misión:** programá a \`sofia\` para que funcione así. Para recordar cuántas lleva, ya tiene el atributo
+\`aprobadas\`.
+
+Antes de escribir, pensá: ¿cuál de los dos mensajes cambia algo de Sofía y cuál solo responde?`,pistas:["`aprobadas()` es una pregunta: responde algo sin cambiar nada. Se escribe `method aprobadas() = ...`.","`aprobar()` es una orden: cambia lo que Sofía recuerda. Va con llaves: `method aprobar() { ... }`."],desenlace:"Cada vez más personas cursan mientras trabajan. Las universidades públicas ofrecen bandas horarias de mañana, tarde y noche para que trabajar y estudiar no sean cosas incompatibles.",inicial:`object sofia {
   var aprobadas = 0
 
 }
@@ -1174,8 +1187,23 @@ object kiosco {
     assert.equals(2, sofia.aprobadas())
   }
 }
-`,expectativas:[{metodo:"sofia.aprobar/0"},{metodo:"sofia.aprobadas/0"}]},{id:"02-cursar/05-el-boleto",titulo:"El boleto",tipo:"codigo",xp:10,enunciado:"Para llegar a la universidad, Sofía toma dos colectivos. El boleto estudiantil le da **40** viajes por mes.\n\nUn mensaje puede recibir un dato entre los paréntesis: un **parámetro**.\n\n**Tu misión:** programá el `boleto`: recuerda sus `viajes()` (arranca en **40**), y `viajar(cantidad)` resta esa\ncantidad de viajes.",pistas:["El parámetro se usa como cualquier valor: `viajes = viajes - cantidad`."],desenlace:"Para muchas familias, el costo del transporte pesa más que cualquier otro gasto de estudiar. Por eso el boleto estudiantil, en las jurisdicciones donde existe, es una de las medidas que más ayudan a que alguien siga cursando.",inicial:`object boleto {
-  var viajes = 40
+`,expectativas:[{metodo:"sofia.aprobar/0"},{metodo:"sofia.aprobadas/0"}]},{id:"02-cursar/05-el-boleto",titulo:"El boleto",tipo:"codigo",xp:10,enunciado:`Para llegar a la universidad, Sofía toma dos colectivos. Arranca el mes con **40** viajes en el boleto
+estudiantil. Cada vez que viaja, el boleto tiene que descontarlos, y en cualquier momento ella quiere saber
+cuántos le quedan. Así lo va a usar:
+
+\`\`\`wollok
+boleto.viajes()     // 40
+boleto.viajar(2)
+boleto.viajar(4)
+boleto.viajes()     // 34
+\`\`\`
+
+Fijate que \`viajar\` recibe un dato entre los paréntesis: un **parámetro**.
+
+**Tu misión:** programá el \`boleto\` para que funcione así.
+
+Antes de escribir, pensá: ¿cuál de los dos mensajes cambia algo del boleto y cuál solo responde? ¿Qué tiene
+que recordar el boleto para poder responder?`,pistas:["Lo que cambia se guarda en un atributo, que arranca con un valor: `var viajes = 40`.","Una pregunta se escribe `method viajes() = viajes`. Una orden va con llaves: `method viajar(cantidad) { ... }`.","Adentro de la orden, el parámetro se usa como cualquier valor: `viajes = viajes - cantidad`."],desenlace:"Para muchas familias, el costo del transporte pesa más que cualquier otro gasto de estudiar. Por eso el boleto estudiantil, en las jurisdicciones donde existe, es una de las medidas que más ayudan a que alguien siga cursando.",inicial:`object boleto {
 
 }
 `,tests:`describe "el boleto" {
@@ -7646,7 +7674,19 @@ una pirámide a medio terminar y cientos de personas arrastrando bloques de pied
 Un escriba anota en una tablilla de arcilla... con un lápiz labial. En la tablilla dice:
 \`var bloques = 0\`.
 
-¿Qué significa que un objeto tenga \`var bloques = 0\`?`,pistas:[],desenlace:"—Acá los errores son más tramposos —dice Ramos—. No están quietos: cambian a medida que pasa el tiempo.",opciones:["Que recuerda cuántos bloques hay, y ese número puede cambiar","Que nunca va a tener bloques","Que es un texto","Que se borra"],correcta:0,explicacion:"Un **atributo** (`var`) es algo que el objeto **recuerda**. Arranca con un valor y las órdenes lo pueden cambiar.",momento:"02-egipto/01"},{id:"02-egipto/01c-el-cantaro",titulo:"El cántaro",tipo:"quiz",xp:5,enunciado:'*Egipto, 2560 a. C.* El salto te deja de cara en la arena. Hace un calor que no sabías que existía. Delante,\nuna pirámide a medio terminar y cientos de personas arrastrando bloques de piedra con sogas.\n\nUn aguatero reparte agua de un cántaro que dice *"Agua mineral sin gas"*. El cántaro arranca con 10 litros.\nAlguien le da la orden `cantaro.servir(3)` y después `cantaro.servir(2)`.\n\nSi `servir` resta los litros que se sirven, ¿cuánto responde `cantaro.litros()`?',pistas:[],desenlace:"—Acá los errores son más tramposos —dice Ramos—. No están quietos: cambian a medida que pasa el tiempo.",opciones:["10","5","3","15"],correcta:1,explicacion:"El cántaro **recuerda** cuánta agua le queda. Cada `servir` resta: 10 − 3 − 2 = 5.",momento:"02-egipto/01"},{id:"02-egipto/02a-el-bloque",titulo:"El bloque",tipo:"codigo",xp:10,enunciado:"Un bloque de piedra tiene rueditas de plástico, como una valija. Hay que dejarlo como era: que avance\n**un metro** cada vez que lo empujan.\n\n**Tu misión:** programá el `bloque`:\n\n- recuerda cuántos `metros()` avanzó (arranca en **0**);\n- `empujar()` lo hace avanzar **1** metro.",pistas:["La pregunta: `method metros() = metros`.","La orden va con llaves: `method empujar() { metros = metros + 1 }`."],desenlace:`Las rueditas se caen solas. El bloque vuelve a arrastrarse sobre troncos, despacio, metro a metro.
+¿Qué significa que un objeto tenga \`var bloques = 0\`?`,pistas:[],desenlace:"—Acá los errores son más tramposos —dice Ramos—. No están quietos: cambian a medida que pasa el tiempo.",opciones:["Que recuerda cuántos bloques hay, y ese número puede cambiar","Que nunca va a tener bloques","Que es un texto","Que se borra"],correcta:0,explicacion:"Un **atributo** (`var`) es algo que el objeto **recuerda**. Arranca con un valor y las órdenes lo pueden cambiar.",momento:"02-egipto/01"},{id:"02-egipto/01c-el-cantaro",titulo:"El cántaro",tipo:"quiz",xp:5,enunciado:'*Egipto, 2560 a. C.* El salto te deja de cara en la arena. Hace un calor que no sabías que existía. Delante,\nuna pirámide a medio terminar y cientos de personas arrastrando bloques de piedra con sogas.\n\nUn aguatero reparte agua de un cántaro que dice *"Agua mineral sin gas"*. El cántaro arranca con 10 litros.\nAlguien le da la orden `cantaro.servir(3)` y después `cantaro.servir(2)`.\n\nSi `servir` resta los litros que se sirven, ¿cuánto responde `cantaro.litros()`?',pistas:[],desenlace:"—Acá los errores son más tramposos —dice Ramos—. No están quietos: cambian a medida que pasa el tiempo.",opciones:["10","5","3","15"],correcta:1,explicacion:"El cántaro **recuerda** cuánta agua le queda. Cada `servir` resta: 10 − 3 − 2 = 5.",momento:"02-egipto/01"},{id:"02-egipto/02a-el-bloque",titulo:"El bloque",tipo:"codigo",xp:10,enunciado:`Un bloque de piedra tiene rueditas de plástico, como una valija. Hay que dejarlo como era: que avance
+**un metro** cada vez que lo empujan, y que se le pueda preguntar cuánto avanzó. Así lo van a usar:
+
+\`\`\`wollok
+bloque.metros()   // 0
+bloque.empujar()
+bloque.empujar()
+bloque.metros()   // 2
+\`\`\`
+
+**Tu misión:** programá el \`bloque\` para que funcione así. Para recordar cuánto avanzó, ya tiene el atributo \`metros\`.
+
+Antes de escribir, pensá: ¿cuál de los dos mensajes cambia algo del bloque y cuál solo responde?`,pistas:["`metros()` es una pregunta: responde algo sin cambiar nada. Se escribe `method metros() = ...`.","`empujar()` es una orden: cambia lo que el bloque recuerda. Va con llaves: `method empujar() { ... }`."],desenlace:`Las rueditas se caen solas. El bloque vuelve a arrastrarse sobre troncos, despacio, metro a metro.
 
 —¿Cómo sabés tanto de grietas? —le preguntás a Ramos. —Arreglé muchas. —¿Cuántas? —Todas las que vas a arreglar vos —dice, y corta.`,inicial:`object bloque {
   var metros = 0
@@ -7662,7 +7702,19 @@ Un escriba anota en una tablilla de arcilla... con un lápiz labial. En la tabli
     assert.equals(2, bloque.metros())
   }
 }
-`,expectativas:[{objeto:"bloque"},{metodo:"bloque.metros/0"},{metodo:"bloque.empujar/0"}],momento:"02-egipto/02"},{id:"02-egipto/02b-la-antorcha",titulo:"La antorcha",tipo:"codigo",xp:10,enunciado:"En el túnel de la pirámide, una linterna de LED alumbra todo. Tiene que ser una antorcha, que arranca\napagada y se enciende.\n\n**Tu misión:** programá la `antorcha`:\n\n- recuerda si `estaEncendida()` (arranca en `false`);\n- `encender()` hace que pase a estar encendida.",pistas:["La pregunta: `method estaEncendida() = encendida`.","La orden va con llaves: `method encender() { encendida = true }`."],desenlace:`La linterna se convierte en una antorcha que chisporrotea. Las paredes del túnel se llenan de sombras que bailan.
+`,expectativas:[{objeto:"bloque"},{metodo:"bloque.metros/0"},{metodo:"bloque.empujar/0"}],momento:"02-egipto/02"},{id:"02-egipto/02b-la-antorcha",titulo:"La antorcha",tipo:"codigo",xp:10,enunciado:`En el túnel de la pirámide, una linterna de LED alumbra todo. Tiene que ser una antorcha, que arranca
+apagada, se enciende, y se le puede preguntar si está encendida. Así la van a usar:
+
+\`\`\`wollok
+antorcha.estaEncendida()   // false
+antorcha.encender()
+antorcha.estaEncendida()   // true
+\`\`\`
+
+**Tu misión:** programá la \`antorcha\` para que funcione así. Para recordar si está encendida, ya tiene el
+atributo \`encendida\`.
+
+Antes de escribir, pensá: ¿cuál de los dos mensajes cambia algo de la antorcha y cuál solo responde?`,pistas:["`estaEncendida()` es una pregunta: responde algo sin cambiar nada. Se escribe `method estaEncendida() = ...`.","`encender()` es una orden: cambia lo que la antorcha recuerda. Va con llaves: `method encender() { ... }`."],desenlace:`La linterna se convierte en una antorcha que chisporrotea. Las paredes del túnel se llenan de sombras que bailan.
 
 —¿Cómo sabés tanto de grietas? —le preguntás a Ramos. —Arreglé muchas. —¿Cuántas? —Todas las que vas a arreglar vos —dice, y corta.`,inicial:`object antorcha {
   var encendida = false
@@ -7677,7 +7729,20 @@ Un escriba anota en una tablilla de arcilla... con un lápiz labial. En la tabli
     assert.that(antorcha.estaEncendida())
   }
 }
-`,expectativas:[{objeto:"antorcha"},{metodo:"antorcha.estaEncendida/0"},{metodo:"antorcha.encender/0"}],momento:"02-egipto/02"},{id:"02-egipto/02c-el-escriba",titulo:"El escriba",tipo:"codigo",xp:10,enunciado:"El escriba que cuenta los bloques terminados usa una calculadora solar. Tiene que llevar la cuenta a\nmano: una marca por cada bloque.\n\n**Tu misión:** programá al `escriba`:\n\n- recuerda cuántas `marcas()` hizo (arranca en **0**);\n- `marcar()` suma **1** marca.",pistas:["La pregunta: `method marcas() = marcas`.","La orden va con llaves: `method marcar() { marcas = marcas + 1 }`."],desenlace:`La calculadora se hace polvo. El escriba moja el junco en tinta y hace una marca, y otra, y otra.
+`,expectativas:[{objeto:"antorcha"},{metodo:"antorcha.estaEncendida/0"},{metodo:"antorcha.encender/0"}],momento:"02-egipto/02"},{id:"02-egipto/02c-el-escriba",titulo:"El escriba",tipo:"codigo",xp:10,enunciado:`El escriba que cuenta los bloques terminados usa una calculadora solar. Tiene que llevar la cuenta a
+mano: una marca por cada bloque, y que se le pueda preguntar cuántas lleva. Así lo van a usar:
+
+\`\`\`wollok
+escriba.marcas()   // 0
+escriba.marcar()
+escriba.marcar()
+escriba.marcas()   // 2
+\`\`\`
+
+**Tu misión:** programá al \`escriba\` para que funcione así. Para recordar cuántas lleva, ya tiene el atributo
+\`marcas\`.
+
+Antes de escribir, pensá: ¿cuál de los dos mensajes cambia algo del escriba y cuál solo responde?`,pistas:["`marcas()` es una pregunta: responde algo sin cambiar nada. Se escribe `method marcas() = ...`.","`marcar()` es una orden: cambia lo que el escriba recuerda. Va con llaves: `method marcar() { ... }`."],desenlace:`La calculadora se hace polvo. El escriba moja el junco en tinta y hace una marca, y otra, y otra.
 
 —¿Cómo sabés tanto de grietas? —le preguntás a Ramos. —Arreglé muchas. —¿Cuántas? —Todas las que vas a arreglar vos —dice, y corta.`,inicial:`object escriba {
   var marcas = 0
